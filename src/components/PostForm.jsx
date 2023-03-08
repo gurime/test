@@ -11,7 +11,7 @@ const [author, setAuthor] = useState('');
 const handleSubmit = async (event) => {
 event.preventDefault();
 try {
-const response = await axios.post('/posts', { title, body, author });
+const response = await axios.post('http://localhost:3000/posts', { title, body, author });
 console.log(response.data);
 } catch (error) {
 console.error('Error creating post:', error);
