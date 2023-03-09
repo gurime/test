@@ -35,7 +35,6 @@ const { id, value } = event.target;
 if (id === 'title') setTitle(value);
 else if (id === 'body') setBody(value);
 else if (id === 'author') setAuthor(value);
-
 setDisabled(title === '' || body === '' || author === '');
 };
 
