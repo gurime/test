@@ -10,7 +10,7 @@ const [posts, setPosts] = useState([]);
 
 useEffect(() => {
 const fetchPosts = async () => {
-const response = await axios.get('http://localhost:3001/api/posts');
+const response = await axios.get('/api/posts');
 setPosts(response.data);
 };
 fetchPosts();
@@ -19,7 +19,7 @@ fetchPosts();
 const handleSubmit = async (event) => {
 event.preventDefault();
 try {
-const response = await axios.post('http://localhost:3001/api/posts', { title, body, author });
+const response = await axios.post('/api/posts', { title, body, author });
 console.log(response.data);
 setPosts([...posts, response.data]);
 setTitle('');
