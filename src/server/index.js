@@ -16,7 +16,7 @@ connectDB()
 app.use(express.json());
 app.use(cors());
 
-app.post('/posts', async (req, res) => {
+app.post('/api/posts', async (req, res) => { 
   try {
     const post = new Post({
       title: req.body.title,
@@ -31,10 +31,7 @@ app.post('/posts', async (req, res) => {
   }
 });
 
-app.listen(3000, (error) => {
-  if (error) {
-    console.error('Error starting server:', error);
-  } else {
-    console.log('Server running on port 3000');
-  }
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => { // updated server listening code
+  console.log(`Server running on port ${PORT}`);
 });
