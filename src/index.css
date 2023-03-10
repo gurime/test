@@ -5,9 +5,12 @@ overflow-x: hidden;
 box-sizing: border-box;
 margin: 0;
 font-family: 'Poppins', sans-serif;
+background-color: #0069d9;
+height: 100%;
 }
+/* post css */
 
-form {
+.postform{
 display: flex;
 flex-direction: column;
 max-width: 600px;
@@ -17,13 +20,13 @@ background-color: #f5f5f5;
 border-radius: 10px;
 }
   
-label {
+.postform label {
 margin-top: 10px;
 font-size: 1.2rem;
 font-weight: bold;
 }
   
-input[type="text"],
+.postform input[type="text"],
 textarea {
 margin-bottom: 20px;
 padding: 10px;
@@ -31,9 +34,9 @@ font-size: 1rem;
 border-radius: 5px;
 border: none;
 background-color: #fff;
+resize: none;
 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-}
-  
+}  
 .submitbtn{
 margin-top: 20px;
 padding: 10px;
@@ -51,72 +54,146 @@ transition: all 0.3s ease-in-out;
 background-color: #0069d9;
 }
 
-/* .submitbtn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  } */
+.submitbtn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+} 
+
+/* post css */
   
-  
+/* posts css */  
 .posts-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-  }
+margin: 20px;
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 5px;
+background-color: #f7f7f7;
+}
   
-  .posts-heading {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-  }
+.posts-heading {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+text-align: center;
+}
   
-  .posts-list {
-    list-style: none;
-    padding: 0;
-  }
+.posts-list {
+list-style: none;
+padding: 0;
+}
   
-  .post-item {
-    display: flex;
-    place-content: space-evenly;
-    place-items: center;
-    margin-bottom: 20px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
+.post-item {
+display: flex;
+place-content: space-between;
+place-items: center;
+margin-bottom: 20px;
+border: 1px solid #eee;
+border-radius: 5px;
+background-color: #fff;
+padding: 10px;
+box-shadow: 2px 2px 5px #0000001a;
+}
   
-  .post-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+.post-title {
+font-size: 20px;
+font-weight: bold;
+margin-bottom: 10px;
+}
   
-  .post-body {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
+.post-body {
+font-size: 16px;
+line-height: 2;
+max-width: 700px;
+letter-spacing: 1px;
+}
   
-  .post-author {
-    font-size: 14px;
-    color: #666;
-  }
+.post-author {
+font-size: 16px;
+color: #666;
+letter-spacing: 1px;
+}
   
-  .post-delete-btn {
-    background-color: #f00;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  }
+.post-delete-btn {
+background-color: #f00;
+color: #fff;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+}
   
-  .post-delete-btn:hover {
-    background-color: #c00;
-  }
+.post-delete-btn:hover {
+background-color: #c00;
+}
+
   
+.post-edit-btn {
+background-color: #0066ff;
+color: #fff;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+}
+  
+.post-edit-btn:hover {
+background-color: #024dbe;
+}
+/* posts css */
+
+
+/* register css */
+.regWrapper{
+display: grid;
+place-items: center;
+height: 100vh;
+margin: auto;
+}
+.regform {
+display: flex;
+flex-direction: column;
+
+margin: 0 auto;
+padding: 20px;
+background-color: #f5f5f5;
+border-radius: 10px;
+}
+
+.reginputs{
+display: flex;
+flex-direction: column;
+place-content: center;
+
+}
+
+.regform label {
+font-size: 1.2rem;
+margin-bottom: 0.5rem;
+}
+
+.regform input {
+padding: 0.5rem;
+font-size: 1.2rem;
+border-radius: 0.25rem;
+border: 1px solid #ccc;
+margin-bottom: 1rem;
+}
+
+.regform button{
+background-color: #007bff;
+color: #fff;
+padding: 0.5rem 1rem;
+font-size: 1.2rem;
+border: none;
+border-radius: 0.25rem;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+}
+
+.regform button:hover {
+background-color: #0062cc;
+}
+/* register css */
+
