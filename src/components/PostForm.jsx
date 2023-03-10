@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function PostForm() {
@@ -18,7 +18,7 @@ function PostForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:3001/posts', { title, body, author })
+    axios.post('http://localhost:3003/post', { title, body, author })
       .then((response) => {
         setPosts([...posts, response.data]);
         setTitle('');
@@ -30,10 +30,19 @@ function PostForm() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3001/posts')
+    axios.get('http://localhost:3003/posts')
       .then((response) => setPosts(response.data))
       .catch((error) => console.error(error));
   }, []);
+
+  function deletePost(id) {
+    axios.delete(`http://localhost:3003/delete/${id}`)
+      .then(() => {
+        alert('ITEM DELETED');
+        setPosts(posts.filter((post) => post._id !== id));
+      })
+      .catch((error) => console.error(error));
+  }
 
   return (
     <>
@@ -55,6 +64,7 @@ function PostForm() {
               <h3>{post.title}</h3>
               <p>{post.body}</p>
               <p>{post.author}</p>
+              <button onClick={() => deletePost(post._id)}>Delete</button>
             </li>
           ))}
         </ul>
@@ -64,4 +74,3 @@ function PostForm() {
 }
 
 export default PostForm;
-
