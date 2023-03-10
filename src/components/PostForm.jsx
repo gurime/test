@@ -38,7 +38,6 @@ function PostForm() {
   function deletePost(id) {
     axios.delete(`http://localhost:3003/delete/${id}`)
       .then(() => {
-        alert('ITEM DELETED');
         setPosts(posts.filter((post) => post._id !== id));
       })
       .catch((error) => console.error(error));
