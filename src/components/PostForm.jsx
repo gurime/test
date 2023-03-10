@@ -52,22 +52,23 @@ function PostForm() {
         <textarea id="body" value={body} onChange={handleInputChange}></textarea>
         <label htmlFor="author">Author:</label>
         <input type="text" id="author" value={author} onChange={handleInputChange} />
-        <button type="submit" disabled={disabled}>Submit</button>
+        <button className='submitbtn' type="submit" disabled={disabled}>Submit</button>
       </form>
 
-      <div>
-        <h2>Posts:</h2>
-        <ul>
-          {posts.map((post) => (
-            <li key={post._id}>
-              <h3>{post.title}</h3>
-              <p>{post.body}</p>
-              <p>{post.author}</p>
-              <button onClick={() => deletePost(post._id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="posts-container">
+  <h2 className="posts-heading">Posts</h2>
+  <ul className="posts-list">
+    {posts.map((post) => (
+    <li key={post._id} className="post-item">
+      <h3 className="post-title">{post.title}</h3>
+      <p className="post-body">{post.body}</p>
+      <p className="post-author">by {post.author}</p>
+      <button className="post-delete-btn" onClick={() => deletePost(post._id)}>Delete</button>
+    </li>
+    ))}
+  </ul>
+</div>
+
     </>
   );
 }
