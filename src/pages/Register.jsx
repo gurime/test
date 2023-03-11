@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -47,6 +47,7 @@ const Register = () => {
       <div className="regWrapper">
         <form className="regform" onSubmit={handleSubmit}>
           <h1>User Registration Form</h1>
+          <Link to='/login' style={{textAlign:'center'}}>Already have an account?</Link>
           <div className="reginputs">
             <label htmlFor="uname">User Name</label>
             <input
