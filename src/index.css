@@ -141,6 +141,11 @@ transition: all 0.2s ease-in-out;
 .post-edit-btn:hover {
 background-color: #024dbe;
 }
+
+.username{
+    font-size: 10px;
+    color: grey;
+}
 /* posts css */
 
 

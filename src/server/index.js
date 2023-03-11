@@ -18,17 +18,15 @@ app.use(cors());
 
 // post routes
 app.post('/post', async (req, res) => {
-const { title, body, author } = req.body;
+const { title, body } = req.body;
 if (!title) {
 return res.status(400).json({ message: 'Title is required' });
 }
 if (!body) {
 return res.status(400).json({ message: 'Body is required' });
 }
-if (!author) {
-return res.status(400).json({ message: 'Author is required' });
-}
-const post = new Post({ title, body, author });
+
+const post = new Post({ title, body });
   
 try {
 await post.save();
@@ -52,9 +50,9 @@ res.status(500).send('Server Error');
 });
 
 app.put('/edit/:id', (req, res) => {
-const { title, body, author } = req.body;
+const { title, body, userName } = req.body;
 const { id } = req.params;
-Post.findByIdAndUpdate(id, { title, body, author }, { new: true })
+Post.findByIdAndUpdate(id, { title, body }, { new: true })
 .then((updatedPost) => {
 res.json(updatedPost);
 })
@@ -84,9 +82,9 @@ res.status(500).json({ message: 'Server Error' });
 
 // Route to register a new user
 app.post('/register', async (req, res) => {
-  const { username, firstName, lastName, email, password, confirmPassword } = req.body;
+  const { userName, firstName, lastName, email, password } = req.body;
 
-  if (!username) {
+  if (!userName) {
     return res.status(400).json({ message: 'Username is required' });
   }
 
@@ -102,17 +100,11 @@ app.post('/register', async (req, res) => {
     return res.status(400).json({ message: 'Email is required' });
   }
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
-  }
 
   if (!password) {
     return res.status(400).json({ message: 'Password is required' });
   }
 
-  if (!confirmPassword) {
-    return res.status(400).json({ message: 'Confirm password is required' });
-  }
 
   try {
     const existingUser = await User.findOne({ email });
@@ -121,7 +113,7 @@ app.post('/register', async (req, res) => {
       return res.status(409).json({ message: 'Email already exists' });
     }
 
-    const user = new User({ username, firstName, lastName, email, password, confirmPassword });
+    const user = new User({ userName, firstName, lastName, email, password });
 
     await user.save();
 
@@ -132,6 +124,7 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
 
 // register routes
 
@@ -167,13 +160,13 @@ app.get('/users/:id', async (req, res) => {
 
 // Route to update a user
 app.put('/users/:id', async (req, res) => {
-  const { username, firstName, lastName, email, password } = req.body;
+  const { userName, firstName, lastName, email, password } = req.body;
   const { id } = req.params;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { username, firstName, lastName, email, password },
+      { userName, firstName, lastName, email, password },
       { new: true }
     );
 
