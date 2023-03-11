@@ -51,11 +51,11 @@ setPosts(posts.filter((post) => post._id !== id));
 }
 
 useEffect(() => {
-if (title && body ) {
-setDisabled(false);
-} else {
-setDisabled(true);
-}
+  if (title && body && title.length <= 200 && body.length <= 200) {
+    setDisabled(false);
+  } else {
+    setDisabled(true);
+  }
 }, [title, body]);
 
 return (
@@ -63,9 +63,11 @@ return (
 <form className='postform' onSubmit={handleSubmit}>
 <label htmlFor="title">Title:</label>
 <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-<label htmlFor="body">Body:</label>
-<textarea rows='10' id="body" value={body} onChange={(e) => setBody(e.target.value)}></textarea>
+<p>{title.length}/200</p>
 
+<label htmlFor="body">Body:</label>
+<textarea rows='5' id="body" value={body} onChange={(e) => setBody(e.target.value)}></textarea>
+<p>{body.length}/200</p>
 {users.map(u => <h4 key={u._id}>{u.firstName} <span className='username'>@{u.userName}</span></h4>)}
 <button className='submitbtn' type="submit" disabled={disabled}>{editPostId ? 'Save' : 'Submit'}</button>
 </form>
