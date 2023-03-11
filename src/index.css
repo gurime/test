@@ -8,6 +8,59 @@ font-family: 'Poppins', sans-serif;
 background-color: #0069d9;
 height: 100%;
 }
+
+/* navbar css */
+.navbar{
+    display: flex;
+    padding: 1rem;
+    }
+        
+    .navlinks{
+    margin: auto;
+    padding: 0;
+    }
+
+    .navlinks button{
+        background-color: #f00;
+color: #fff;
+border: none;
+padding: 5px 10px;
+border-radius: 5px;
+cursor: pointer;
+
+    }
+    
+    .navlinks li {
+    display: inline-block;
+    list-style-type: none;
+    }
+    
+    .navlinks a {
+    padding: 1rem;
+    margin: 24px;
+    text-decoration: none;
+    color: #fff;
+    } 
+    
+    .logo{
+    margin: auto;
+    }
+    
+    .logo a{
+    margin: auto;
+    font-size: 30px;
+    text-decoration: none;
+    }
+            
+    .logo img{
+    height: 36px;
+    transform: translateY(3px);
+    
+    }
+    
+/* navbar css */
+
+
 /* post css */
 
 .postform{
@@ -63,89 +116,139 @@ cursor: not-allowed;
   
 /* posts css */  
 .posts-container {
-margin: 20px;
-padding: 20px;
-border: 1px solid #ddd;
-border-radius: 5px;
-background-color: #f7f7f7;
-}
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
   
-.posts-heading {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 10px;
-text-align: center;
-}
+  .posts-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
   
-.posts-list {
-list-style: none;
-padding: 0;
-}
+  .posts-list {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 0.5em;
+    width: 80%;
+    list-style: none;
+    padding: 0;
+  }
   
-.post-item {
-display: flex;
-place-content: space-between;
-place-items: center;
-margin-bottom: 20px;
-border: 1px solid #eee;
-border-radius: 5px;
-background-color: #fff;
-padding: 10px;
-box-shadow: 2px 2px 5px #0000001a;
-}
+  .post-item {
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 2px 2px 5px #0000001a;
+  }
   
-.post-title {
-font-size: 20px;
-font-weight: bold;
-margin-bottom: 10px;
-}
+  .post-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 700px;
+  }
   
-.post-body {
-font-size: 16px;
-line-height: 2;
-max-width: 700px;
-letter-spacing: 1px;
-}
+  .post-body {
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 1px;
+  }
   
-.post-author {
-font-size: 16px;
-color: #666;
-letter-spacing: 1px;
-}
+  .post-author {
+    font-size: 16px;
+    color: #666;
+    letter-spacing: 1px;
+    max-width: 700px;
+  }
   
-.post-delete-btn {
-background-color: #f00;
-color: #fff;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-transition: all 0.2s ease-in-out;
-}
+  .post-delete-btn {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
   
-.post-delete-btn:hover {
-background-color: #c00;
-}
-
+  .post-delete-btn:hover {
+    background-color: #c00;
+  }
   
-.post-edit-btn {
-background-color: #0066ff;
-color: #fff;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-transition: all 0.2s ease-in-out;
-}
+  .post-edit-btn {
+    background-color: #0066ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
   
-.post-edit-btn:hover {
-background-color: #024dbe;
-}
-
-.username{
+  .post-edit-btn:hover {
+    background-color: #024dbe;
+  }
+  
+  .username {
     font-size: 10px;
     color: grey;
-}
+  }
+
+  .btnBlock{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .authorBlock{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .bodyBlock{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  /* Media queries */
+  @media screen and (max-width: 767px) {
+    /* Adjust the grid template columns to one column */
+    .posts-list {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Set the max width of post title and author to 100% */
+    .post-title,
+    .post-author {
+      max-width: 100%;
+    }
+    
+    /* Adjust the padding of post item */
+    .post-item {
+      padding: 10px;
+    }
+    
+    /* Adjust the font size of posts heading */
+    .posts-heading {
+      font-size: 18px;
+    }
+    
+    /* Adjust the font size of post title and author */
+    .post-title,
+    .post-author {
+      font-size: 16px;
+    }
+    
+    /* Adjust the font size of post body */
+    .post-body {
+      font-size: 14px;
+    }
+  }
 /* posts css */
 
 
@@ -202,3 +305,59 @@ background-color: #0062cc;
 }
 /* register css */
 
+
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Adjust the grid template columns to two columns */
+    .posts-list {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media(max-width:768px){
+    .navbar{
+        flex-direction: column;
+    }
+
+    .logo a{
+        font-size: 18px;
+    }
+.navlinks a{
+    padding: 10px;
+}
+    
+
+
+}  @media screen and (max-width: 767px) {
+    /* Adjust the grid template columns to one column */
+    .posts-list {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Set the max width of post title and author to 100% */
+    .post-title,
+    .post-author {
+      max-width: 100%;
+    }
+    
+    /* Adjust the padding of post item */
+    .post-item {
+      padding: 10px;
+    }
+    
+    /* Adjust the font size of posts heading */
+    .posts-heading {
+      font-size: 18px;
+    }
+    
+    /* Adjust the font size of post title and author */
+    .post-title,
+    .post-author {
+      font-size: 16px;
+    }
+    
+    /* Adjust the font size of post body */
+    .post-body {
+      font-size: 14px;
+    }
+  }

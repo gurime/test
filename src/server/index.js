@@ -217,7 +217,14 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-  
+app.post('/logout', (req, res) => {
+  // Remove the JWT token from the client-side storage
+  res.clearCookie('jwt');
+
+  // Redirect the user to the login page or any other page
+  res.redirect('login');
+});
+
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {

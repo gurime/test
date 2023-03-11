@@ -75,11 +75,19 @@ return (
 <ul className="posts-list">
 {posts.map((post) => (
 <li key={post._id} className="post-item">
+  <div className='titleBlock'>
 <h3 className="post-title">{post.title}</h3>
+</div>
+<div className='bodyBlock'>
 <p className="post-body">{post.body}</p>
-<p className="post-author"> {users.map(u => u.userName)}</p>
+</div>
+<div className='authorBlock'>
+<p className="post-author">{users.map(u => u.firstName)} <span className='username'>@{users.map(u => u.userName)}</span></p>
+</div>
+<div className='btnBlock'>
 <button className="post-edit-btn" onClick={() => handleEdit(post)}>Edit</button>
 <button className="post-delete-btn" onClick={() => deletePost(post._id)}>Delete</button>
+</div>
 </li>
 ))}
 </ul>
