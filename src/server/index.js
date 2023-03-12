@@ -3,6 +3,7 @@ import cors from 'cors';
 import connectDB from '../db/index.js';
 import {Post, User} from '../schemas/index.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt'
 const app = express();
 
 connectDB()
@@ -132,30 +133,26 @@ app.post('/register', async (req, res) => {
 
 // Route to authenticate a user
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
-
   try {
-    const user = await User.findOne({ email });
+    const { email, password } = req.body;
 
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    if (user.password !== password) {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = user.generateAuthToken();
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    user.token = token;
+    await user.save();
 
-    res.json({ user, token });
+    return res.status(200).json({ token });
   } catch (error) {
-    console.error(error);
-
-    res.status(500).json({ message: 'Server Error' });
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -217,13 +214,24 @@ app.put('/users/:id', async (req, res) => {
 });
 
 
-app.post('/logout', function(req, res){
-  res.clearCookie('jwt');
-  res.json({ message: 'User logged out' });
+app.post('/logout', async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.token = '';
+    await user.save();
+    return res.status(200).json({ message: 'User successfully logged out' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 });
 
-
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 4005;
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`);
 });

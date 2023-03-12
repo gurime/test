@@ -4,18 +4,23 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const handleLogout = async () => {
+    function handleLogout() {
       const token = localStorage.getItem('token');
     
-      try {
-        await axios.post("http://localhost:3005/logout", null, { headers: { Authorization: `Bearer ${token}` } });
-        localStorage.clear();
-        navigate('/login');
-      } catch (error) {
+      axios.post('http://localhost:4005/logout', null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response.data.message); // success message
+        localStorage.removeItem('token');
+navigate('login')      
+})
+      .catch((error) => {
         console.error(error);
-        // handle error appropriately
-      }
-    }; 
+        // handle the error
+      });
+    }
+    
     
     
 return (

@@ -25,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3005/login", user);
+      const res = await axios.post("http://localhost:4005/login", user);
       console.log(res.data);
       navigate("/");
     } catch (error) {
