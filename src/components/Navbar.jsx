@@ -1,24 +1,23 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        axios.delete('http://localhost:3003/logout')
-          .then(response => {
-            // Clear any local storage or session storage items
-            localStorage.clear();
-            sessionStorage.clear();
-            // Redirect the user to the login page or home page
-            navigate('login');
-          })
-          .catch(error => {
-            console.error('Error logging out', error);
-          });
-      };
-
+    const handleLogout = async () => {
+      const token = localStorage.getItem('token');
+    
+      try {
+        await axios.post("http://localhost:3005/logout", null, { headers: { Authorization: `Bearer ${token}` } });
+        localStorage.clear();
+        navigate('/login');
+      } catch (error) {
+        console.error(error);
+        // handle error appropriately
+      }
+    }; 
+    
+    
 return (
 <>
 <nav className='navbar'>

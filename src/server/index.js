@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from '../db/index.js';
 import {Post, User} from '../schemas/index.js';
-
+import jwt from 'jsonwebtoken';
 const app = express();
 
 connectDB()
@@ -145,9 +145,7 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const isMatch = await user.comparePassword(password);
-
-    if (!isMatch) {
+    if (user.password !== password) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
@@ -160,6 +158,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
 // Route to authenticate a user
 
 
@@ -217,16 +216,14 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-app.post('/logout', (req, res) => {
-  // Remove the JWT token from the client-side storage
-  res.clearCookie('jwt');
 
-  // Redirect the user to the login page or any other page
-  res.redirect('login');
+app.post('/logout', function(req, res){
+  res.clearCookie('jwt');
+  res.json({ message: 'User logged out' });
 });
 
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`);
 });
