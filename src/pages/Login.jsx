@@ -1,17 +1,15 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState({
-    
     email: "",
     password: "",
   });
+  const { login } = AuthContext();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,12 +19,10 @@ const Login = () => {
     }));
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4005/login", user);
-      console.log(res.data);
+      await login(user.email, user.password);
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -43,16 +39,16 @@ const Login = () => {
     }
   };
 
-
-return (
-<>      <div className="regWrapper">
+  return (
+    <>
+      <div className="regWrapper">
         <form className="regform" onSubmit={handleSubmit}>
           <h1>User Login Form</h1>
-          <Link to='/register' style={{textAlign:'center'}}>Need an account?</Link>
+          <Link to="/register" style={{ textAlign: "center" }}>
+            Need an account?
+          </Link>
 
           <div className="reginputs">
-         
-
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -79,8 +75,9 @@ return (
             <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
           )}
         </form>
-      </div></>
-)
-}
+      </div>
+    </>
+  );
+};
 
-export default Login
+export default Login;

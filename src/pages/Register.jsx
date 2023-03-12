@@ -1,10 +1,11 @@
-import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthProvider";
 
 const Register = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const { register } = useContext(AuthContext);
   const [user, setUser] = useState({
     userName: "",
     firstName: "",
@@ -12,6 +13,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,8 +27,14 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3005/register", user);
-      console.log(res.data);
+      const data = await register(
+        user.firstName,
+        user.lastName,
+        user.email,
+        user.password,
+        user.userName
+      );
+      console.log(data);
       navigate("/");
     } catch (error) {
       console.error(error);
