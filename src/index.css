@@ -12,12 +12,14 @@ height: 100%;
 /* navbar css */
 .navbar{
     display: flex;
-    padding: 1rem;
+    
     }
         
     .navlinks{
+      display: flex;
+      place-items: center;
     margin: auto;
-    padding: 0;
+  
     }
 
     .navlinks button{
@@ -36,7 +38,7 @@ cursor: pointer;
     }
     
     .navlinks a {
-    padding: 1rem;
+    
     margin: 24px;
     text-decoration: none;
     color: #fff;
@@ -202,6 +204,12 @@ cursor: not-allowed;
   .username {
     font-size: 10px;
     color: grey;
+  }
+
+  .titleBlock{
+  display: grid;
+    place-content: center;
+    place-items: center;
   }
 
   .btnBlock{

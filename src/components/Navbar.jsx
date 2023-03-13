@@ -1,55 +1,64 @@
-import React, { useContext } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthProvider';
+import  { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Navbar = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const [users, setUsers] = useState([]);
+
+  const getData = async() => {
+    const res = await axios.get('http://localhost:4005/users')
+    setUsers(res.data)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    const token = localStorage.getItem('token');
+  const handleLogout = async (e) => {
     try {
-      await axios.post('http://localhost:4005/logout', null, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      localStorage.removeItem('token');
-      setUser(null);
+      await logout();
+      localStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error(error);
       // handle the error
     }
   };
-
   return (
     <>
-      <nav className="navbar">
-        <div className="logo">
-          <NavLink to="/">Logo</NavLink>
-        </div>
+  <nav className="navbar"  >
+  <div className="logo">
+    <Link to="/">Logo</Link>
+  </div>
 
-        <ul className="navlinks">
-          <NavLink
-            to="/"
-            style={({ isActive }) =>
-              isActive ? { backgroundColor: 'blue' } : {}
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-          {user ? (
-            <button onClick={handleLogout}>Logout</button>
-          ) : (
-            <>
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
-            </>
-          )}
-        </ul>
-      </nav>
+  <ul className="navlinks">
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/about">About</Link></li>
+    <li><Link to="/contact">Contact</Link></li>
+
+    {/* login info */}
+    {users ? (
+      <>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/register">Register</Link></li>
+      </>
+    ) : (
+      <>
+        {users.map(u => (
+          <li key={u.id}>
+            <span style={{color:'#fff'}}>{u.firstName}</span>
+            <span style={{padding:'0 1rem',color:'#fff'}}>{u.lastName}</span>
+            <button data-user-id={u.id} onClick={handleLogout}>Logout</button>
+          </li>
+        ))}
+      </>
+    )}
+    {/* login info */}
+  </ul>
+</nav>
+
     </>
   );
 };

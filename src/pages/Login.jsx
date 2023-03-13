@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,7 +7,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { login } = AuthContext();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -19,25 +16,7 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await login(user.email, user.password);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      if (error.response) {
-        // If the server responds with an error message
-        setErrorMessage(error.response.data.message);
-      } else if (error.request) {
-        // If the request was made but no response was received
-        setErrorMessage("Network error, please try again");
-      } else {
-        // If something else happened
-        setErrorMessage("Error, please try again");
-      }
-    }
-  };
+
 
   return (
     <>

@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {AuthContext} from "../context/AuthProvider";
 
 const Register = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const { register } = useContext(AuthContext);
+  const { register } = useContext(AuthContextProvider);
   const [user, setUser] = useState({
     userName: "",
     firstName: "",
@@ -34,7 +33,7 @@ const Register = () => {
         user.password,
         user.userName
       );
-      console.log(data);
+    
       navigate('/');
     } catch (error) {
       console.error(error);

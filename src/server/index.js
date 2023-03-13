@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // post routes
-app.post('/post', async (req, res) => {
+app.post('http://localhost:4005/post', async (req, res) => {
 const { title, body } = req.body;
 if (!title) {
 return res.status(400).json({ message: 'Title is required' });
@@ -40,7 +40,7 @@ res.status(500).json({ message: 'Server Error' });
   
 
 // Route to get all posts
-app.get('/posts', async (req, res) => {
+app.get('http://localhost:4005/posts', async (req, res) => {
 try {
 const posts = await Post.find();
 res.send(posts);
@@ -50,7 +50,7 @@ res.status(500).send('Server Error');
 }
 });
 
-app.put('/edit/:id', (req, res) => {
+app.put('http://localhost:4005/edit/:id', (req, res) => {
 const { title, body, userName } = req.body;
 const { id } = req.params;
 Post.findByIdAndUpdate(id, { title, body }, { new: true })
@@ -64,7 +64,7 @@ res.status(500).json({ error: err.message });
 
 
 // Route to delete a post
-app.delete('/delete/:id', async (req, res) => {
+app.delete('http://localhost:4005/delete/:id', async (req, res) => {
 try {
 const deletedPost = await Post.findByIdAndRemove(req.params.id).exec();
 if (!deletedPost) {
@@ -82,7 +82,7 @@ res.status(500).json({ message: 'Server Error' });
 // register routes
 
 // Route to register a new user
-app.post('/register', async (req, res) => {
+app.post('http://localhost:4005/register', async (req, res) => {
   const { userName, firstName, lastName, email, password } = req.body;
 
   if (!userName) {
@@ -132,7 +132,7 @@ app.post('/register', async (req, res) => {
 
 
 // Route to authenticate a user
-app.post('/login', async (req, res) => {
+app.post('http://localhost:4005/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -160,7 +160,7 @@ app.post('/login', async (req, res) => {
 
 
 // Route to get all users
-app.get('/users', async (req, res) => {
+app.get('http://localhost:4005/users', async (req, res) => {
   try {
     const users = await User.find();
 
@@ -173,7 +173,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Route to get a single user
-app.get('/users/:id', async (req, res) => {
+app.get('http://localhost:4005/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
@@ -190,7 +190,7 @@ app.get('/users/:id', async (req, res) => {
 });
 
 // Route to update a user
-app.put('/users/:id', async (req, res) => {
+app.put('http://localhost:4005/users/:id', async (req, res) => {
   const { userName, firstName, lastName, email, password } = req.body;
   const { id } = req.params;
 
@@ -214,7 +214,7 @@ app.put('/users/:id', async (req, res) => {
 });
 
 
-app.post('/logout', async (req, res) => {
+app.post('http://localhost:4005/logout', async (req, res) => {
   try {
     const userId = req.body.userId;
     const user = await User.findById(userId);
