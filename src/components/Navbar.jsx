@@ -6,7 +6,7 @@ const Navbar = () => {
   const [users, setUsers] = useState([]);
 
   const getData = async() => {
-    const res = await axios.get('http://localhost:4005/users')
+    const res = await axios.get('/users')
     setUsers(res.data)
   }
 
@@ -37,24 +37,23 @@ const Navbar = () => {
     <li><Link to="/">Home</Link></li>
     <li><Link to="/about">About</Link></li>
     <li><Link to="/contact">Contact</Link></li>
+    {users.length === 0 ? (
+  <>
+    <li><Link to="/login">Login</Link></li>
+    <li><Link to="/register">Register</Link></li>
+  </>
+) : (
+  <>
+    {users.map(u => (
+      <li key={u.id}>
+        <span style={{color:'#fff'}}>{u.firstName}</span>
+        <span style={{padding:'0 1rem',color:'#fff'}}>{u.lastName}</span>
+        <button data-user-id={u.id} onClick={handleLogout}>Logout</button>
+      </li>
+    ))}
+  </>
+)}
 
-    {/* login info */}
-    {users ? (
-      <>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-      </>
-    ) : (
-      <>
-        {users.map(u => (
-          <li key={u.id}>
-            <span style={{color:'#fff'}}>{u.firstName}</span>
-            <span style={{padding:'0 1rem',color:'#fff'}}>{u.lastName}</span>
-            <button data-user-id={u.id} onClick={handleLogout}>Logout</button>
-          </li>
-        ))}
-      </>
-    )}
     {/* login info */}
   </ul>
 </nav>

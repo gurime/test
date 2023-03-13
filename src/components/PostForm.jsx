@@ -9,7 +9,7 @@ const [disabled, setDisabled] = useState(true);
 const [editPostId, setEditPostId] = useState(null);
 const [users, setUsers] = useState([])
 const getData = async() => {
-const res = await axios.get('http://localhost:4005/users')
+const res = await axios.get('/users')
 setUsers(res.data)
 }
 
@@ -19,7 +19,7 @@ useEffect(() => {
   
 const handleSubmit = (event) => {
 event.preventDefault();
-axios.post('http://localhost:4005/post', { title, body })
+axios.post('/post', { title, body })
 .then((response) => {
 setPosts((prevPosts) => [...prevPosts, response.data]);
 setTitle('');
@@ -37,13 +37,13 @@ setEditPostId(post._id);
 
 
 useEffect(() => {
-axios.get('http://localhost:4005/posts')
+axios.get('/posts')
 .then((response) => setPosts(response.data))
 .catch((error) => console.error(error));
 }, []);
 
 function deletePost(id) {
-axios.delete(`http://localhost:4005/delete/${id}`)
+axios.delete(`delete/${id}`)
 .then(() => {
 setPosts(posts.filter((post) => post._id !== id));
 })
