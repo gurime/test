@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthProvider";
+import {AuthContext} from "../context/AuthProvider";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Register = () => {
         user.userName
       );
       console.log(data);
-      navigate("/");
+      navigate('/');
     } catch (error) {
       console.error(error);
       if (error.response) {
@@ -43,10 +43,10 @@ const Register = () => {
         setErrorMessage(error.response.data.message);
       } else if (error.request) {
         // If the request was made but no response was received
-        setErrorMessage("Network error, please try again");
+        setErrorMessage('Network error, please try again');
       } else {
         // If something else happened
-        setErrorMessage("Error, please try again");
+        setErrorMessage('Error, please try again');
       }
     }
   };

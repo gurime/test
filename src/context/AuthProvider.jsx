@@ -27,9 +27,9 @@ const AuthProvider = ({children}) => {
         console.error(error);
       }
     },
-    register: async (firstName, lastName, email, password, name) => {
+    register: async (firstName, lastName, email, password, userName ) => {
       try {
-        const res = await axios.post('http://localhost:4005/register', { firstName, lastName, email, password, name });
+        const res = await axios.post('http://localhost:4005/register', {firstName, lastName, email, password, userName   });
         const data = res.data;
         if (data.user) {
           setUser(data.user);
